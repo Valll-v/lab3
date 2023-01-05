@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+<f:view>
+    <h:head>
+        <meta charset="UTF-8"/>
+        <meta name="viewport" content="width=device-width"/>
+        <title>Web lab</title>
+        <h:outputStylesheet library="css" name="style.css" />
+        <h:outputStylesheet library="css" name="form.css" />
+        <h:outputStylesheet library="css" name="graph.css" />
+        <h:outputStylesheet library="css" name="table.css" />
+    </h:head>
+    <h:body>
+        <header>
+            <div>
+                <h:form>
+                    <h:commandButton action="return" value="Return" class="nav-button nav-button-left" />
+                </h:form>
+            </div>
+        </header>
+        <canvas id='example'>Обновите браузер</canvas>
+        <h:outputScript name="graph.js" library="js"/>
+        <h:form id="form" onsubmit="return validate()" method="GET" action="${pageContext.request.contextPath}/area">
+            <div class="input-container" id="x-input">
+                <h:outputLabel for="xCord" value="X" />
+                <h:selectOneRadio value="#{point.x}" id="xCord">
+                    <f:validator validatorId="xCordValidator"/>
+                    <f:selectItem itemValue="-2" itemLabel="-2" />
+                    <f:selectItem itemValue="-1.5" itemLabel="-1.5" />
+                    <f:selectItem itemValue="-1" itemLabel="-1" />
+                    <f:selectItem itemValue="-0.5" itemLabel="-0.5" />
+                    <f:selectItem itemValue="0" itemLabel="0" />
+                    <f:selectItem itemValue="0.5" itemLabel="0.5" />
+                    <f:selectItem itemValue="1" itemLabel="1" />
+                    <f:selectItem itemValue="1.5" itemLabel="1.5" />
+                    <f:selectItem itemValue="2" itemLabel="2" />
+                </h:selectOneRadio>
+            </div>
+            <div class="input-container" id="y-input">
+                <h:outputLabel for="yCord" value="R" />
+                <h:inputText value = "#{point.y}" id="yCord">
+                    <f:validator validatorId="yCordValidator"/>
+                </h:inputText>
+            </div>
+            <div class="input-container" id="r-input">
+                <h:outputLabel for="rCord" value="R" />
+                <h:selectOneRadio value="#{point.r}" id="rCord">
+                    <f:validator validatorId="rCordValidator"/>
+                    <f:selectItem itemValue="3" itemLabel="3" />
+                    <f:selectItem itemValue="2" itemLabel="2" />
+                    <f:selectItem itemValue="1" itemLabel="1" />
+                    <f:selectItem itemValue="0" itemLabel="0" />
+                    <f:selectItem itemValue="-1" itemLabel="-1" />
+                    <f:selectItem itemValue="-2" itemLabel="-2" />
+                    <f:selectItem itemValue="-3" itemLabel="-3" />
+                </h:selectOneRadio>
+            </div>
+            <div class="button-wrapper submit field card">
+                <h:commandButton styleClass="button" action="#{points.addPoint(point)}" value="ТЫК">
+                    <f:ajax execute="@form" render="table owner-table" onevent="pageSetting"/>
+                </h:commandButton>
+            </div>
+            <div class="table-wrapper card">
+                <p style="text-align: center; width: 100%; line-height: 2em; font-weight: 600;">Your points</p>
+                <h:dataTable bgcolor="#FFFFFF" value="#{points.userPoints}" var="el" id="owner-table" styleClass="table">
+                    <h:column>
+                        <f:facet name="header">X</f:facet>
+                        ${el.x}
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">Y</f:facet>
+                        ${el.y}
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">R</f:facet>
+                        ${el.r}
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">Время выполнения</f:facet>
+                        ${el.formatDate}
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">Результат</f:facet>
+                        ${el.prettyResult}
+                    </h:column>
+                </h:dataTable>
+            </div>
+        </h:form>
+    </h:body>
+</f:view>
+</html>

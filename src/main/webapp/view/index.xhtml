@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html   lang="en"
+        xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:h="http://xmlns.jcp.org/jsf/html">
+    <h:head>
+        <meta charset="UTF-8"/>
+        <meta name="viewport" content="width=device-width"/>
+        <title>Web lab 3</title>
+        <h:outputStylesheet name="style.css" library="css"/>
+        <h:outputStylesheet library="css" name="style.css" />
+        <h:outputStylesheet library="css" name="form.css" />
+        <h:outputStylesheet library="css" name="graph.css" />
+        <h:outputStylesheet library="css" name="table.css" />
+        <h:outputStylesheet library="css" name="clock.css" />
+        <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    </h:head>
+    <h:body>
+        <header>
+            <div class="header-container">
+                <span>Valerii Stepanenko</span>
+                <span>P32311</span>
+                <span>var 267384732</span>
+            </div>
+            <div>
+                <h:form>
+                    <h:commandButton action="main" value="To Main" class="nav-button nav-button-right" />
+                </h:form>
+            </div>
+        </header>
+        <div class="description-block">
+            <div class="clock card">
+                <div class="clock-inner">
+                    <div class="clock-center"></div>
+                    <div id="clock-seconds"></div>
+                    <div id="clock-minutes"></div>
+                    <div id="clock-hours"></div>
+                    <ul class="clock-numbers">
+                        <li>12</li>
+                        <li>3</li>
+                        <li>6</li>
+                        <li>9</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    <h:outputScript library="js" name="clock.js"/>
+    </h:body>
+</html>
